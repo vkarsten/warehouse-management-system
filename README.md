@@ -7,6 +7,7 @@ This repository will contain the individual project for the [DCI Java Course](ht
 - a user system with roles and permissions for listing and placing orders
 - maintaining the stock of the warehouse
 - ordering items from the warehouse
+- generating barcodes and labels
 - reversing orders
 - log actions from users
 - reporting
@@ -15,5 +16,10 @@ This repository will contain the individual project for the [DCI Java Course](ht
 ### Implemented app features:
 - ...
 
+**License:**
+[MIT License](LICENSE.txt)
 
-Author: [Viktoria Karsten](https://github.com/vkarsten)
+**Author:** 
+[Viktoria Karsten](https://github.com/vkarsten) 
+
+
