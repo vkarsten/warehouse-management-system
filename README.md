@@ -16,6 +16,8 @@ This repository will contain the individual project for the [DCI Java Course](ht
 ### Implemented app features:
 - ...
 
+---
+
 **License:**
 [MIT License](LICENSE.txt)
 
