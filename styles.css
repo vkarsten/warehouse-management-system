@@ -3,6 +3,10 @@ body {
     background-color: #e8eeff;
 }
 
+.important {
+    font-weight: bold;
+}
+
 .container-fluid {
     margin: 0px 5px;
     padding: 12px;
@@ -27,13 +31,21 @@ body {
 .nav {
     padding: 12px;
     text-transform: uppercase;
-    color: white;
+}
+
+.nav-item a {
+    font-family: 'Poppins', sans-serif;
+    color: #3e5082;
+}
+
+.nav-item a:hover {
+    color: #7d9ae8;
 }
 
 .rounded {
     background: rgba(255, 255, 255, 0.3);
     padding: 12px;
-    margin-bottom: 12px;
+    margin-bottom: 20px;
 }
 
 .announcement {
@@ -50,28 +62,65 @@ h2 {
     width: 300px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 20px;
     font-family: 'Poppins', sans-serif;
 }
 
+p {
+    font-size: 22px;
+    margin-top: 20px;
+
+}
+
 a {
-    font-size: 28px;
+    font-size: 20px;
+    text-decoration: none;
 }
 
 a:hover {
-    color: darkblue;
+    color: #3e5082;
     text-transform: uppercase;
+    font-weight: bold;
 }
 
 #team {
-    width: 400px;
-    height: auto;
+    width: 30%;
+    height: 30%;
     display: inline;
+    border-radius: 5%;
+    box-shadow: 5px 5px 5px #ccc;
+    padding: 5px;
+    margin: 5px;
 }
 
 table {
-    display: inline;
+    font-size: 20px;
+    margin: 5px;
+    padding: 5px;
+}
+
+th {
+    color: #3e5082;
+}
+
+.features-heading {
+    color: #3e5082;
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+}
+
+.feature {
+    background-color: rgba(255, 255, 255, 0);
+    font-size: 18px;
 }
 
 .footer {
     background: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+}
+
+.footer-line {
+    display: inline-block;
+    font-size: 16px;
+    color: darkgrey;
 }
