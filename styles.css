@@ -1,0 +1,77 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #e8eeff;
+}
+
+.container-fluid {
+    margin: 0px 5px;
+    padding: 12px;
+}
+
+.header {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+#logo {
+    height: 150px;
+    width: 150px;
+    display: inline;
+}
+
+.header-heading {
+    display: inline;
+    text-transform: uppercase;
+    font-size: 65px;
+}
+
+.nav {
+    padding: 12px;
+    text-transform: uppercase;
+    color: white;
+}
+
+.rounded {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 12px;
+    margin-bottom: 12px;
+}
+
+.announcement {
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 14px;
+}
+
+.badge {
+    font-size: 32px;
+    display: block;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Poppins', sans-serif;
+}
+
+a {
+    font-size: 28px;
+}
+
+a:hover {
+    color: darkblue;
+    text-transform: uppercase;
+}
+
+#team {
+    width: 400px;
+    height: auto;
+    display: inline;
+}
+
+table {
+    display: inline;
+}
+
+.footer {
+    background: rgba(255, 255, 255, 0.8);
+}
