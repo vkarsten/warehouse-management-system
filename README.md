@@ -17,9 +17,10 @@ This repository will contain the individual project for the [DCI Java Course](ht
 - ...
 
 ### Development setup:
-- installed IntelliJ IDE
-- installed Amazon Corretto 11 JDK
-- created a new project in IntelliJ IDE
+- installed IntelliJ IDEA Community Edition with Homebrew Package Manager
+  - `brew install --cask intellij-idea-ce`
+- installed Amazon Corretto 11 JDK in IntelliJ IDEA
+- created a new project in IntelliJ IDEA with Maven Layout Project Structure
 
 ---
 
