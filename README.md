@@ -16,6 +16,10 @@ This repository will contain the individual project for the [DCI Java Course](ht
 ### Implemented app features:
 - ...
 
+### Steps so far:
+- added a project homepage
+- setup of development environment
+- 
 ---
 
 **License:**
