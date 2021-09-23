@@ -16,10 +16,11 @@ This repository will contain the individual project for the [DCI Java Course](ht
 ### Implemented app features:
 - ...
 
-### Steps so far:
-- added a project homepage
-- setup of development environment
-- 
+### Development setup:
+- installed IntelliJ IDE
+- installed Amazon Corretto 11 JDK
+- created a new project in IntelliJ IDE
+
 ---
 
 **License:**
