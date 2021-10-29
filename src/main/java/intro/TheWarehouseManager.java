@@ -37,9 +37,9 @@ public class TheWarehouseManager {
     /** Ask for user's choice of action */
     public int getUsersChoice() {
         System.out.println("What would you like to do?");
-        System.out.println("1. List items by warehouse");
-        System.out.println("2. Search an item and place an order");
-        System.out.println("3. Quit");
+        for (String option : this.userOptions) {
+            System.out.println(option);
+        }
         System.out.println("Type the number of the operation:");
         int choice;
         try {
