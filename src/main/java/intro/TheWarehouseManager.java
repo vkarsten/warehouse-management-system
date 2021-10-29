@@ -161,10 +161,10 @@ public class TheWarehouseManager {
     }
 
     /**
-     * Calculate total availability of the given item
+     * Calculate availabilities of the given item
      *
      * @param itemName itemName
-     * @return integer availableCount
+     * @return integer array, total count, count in Warehouse 1, count in Warehouse 2
      */
     private int[] getAvailableAmounts(String itemName) {
         int amountw1 = find(itemName, WAREHOUSE1);
