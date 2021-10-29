@@ -115,8 +115,7 @@ public class TheWarehouseManager {
     }
 
     private void searchItemAndPlaceOrder() {
-        System.out.println("What is the name of the item?");
-        String itemName = reader.nextLine();
+        String itemName = askItemToOrder();
 
         int[] allAmounts = this.getAvailableAmounts(itemName);
 
@@ -144,7 +143,8 @@ public class TheWarehouseManager {
             }
         }
 
-        char choice = this.askItemToOrder();
+        System.out.println("Would you like to order this item? (y/n)");
+        char choice = reader.nextLine().toLowerCase().charAt(0);
 
         if (choice == 'y') this.askAmountAndConfirmOrder(allAmounts[0], itemName);
 
@@ -155,9 +155,9 @@ public class TheWarehouseManager {
      *
      * @return String itemName
      */
-    private char askItemToOrder() {
-        System.out.println("Would you like to order this item? (y/n)");
-        return reader.nextLine().toLowerCase().charAt(0);
+    private String askItemToOrder() {
+        System.out.println("What is the name of the item?");
+        return reader.nextLine();
     }
 
     /**
