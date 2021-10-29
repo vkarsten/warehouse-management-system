@@ -185,7 +185,7 @@ public class TheWarehouseManager {
         int amount = 0;
 
         for (String product: warehouse) {
-            if (product.equals(item)) amount++;
+            if (product.toLowerCase().equals(item.toLowerCase())) amount++;
         }
 
         return amount;
