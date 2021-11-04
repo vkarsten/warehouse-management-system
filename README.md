@@ -14,7 +14,9 @@ This repository will contain the individual project for the [DCI Java Course](ht
 - analyzing
 
 ### Implemented app features:
-- ...
+- List items by warehouse
+- Search items and place orders
+- Browsing by category
 
 ### Development setup:
 - install [IntelliJ IDEA Community Edition](https://www.jetbrains.com/idea/) with [Homebrew Package Manager](https://brew.sh/) in the Terminal:
