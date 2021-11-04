@@ -24,6 +24,7 @@ public class TheWarehouseManager {
     // To refer the user provided name.
     private String userName;
 
+    // To refer to warehouses and categories
     private Set<Integer> warehouses = Repository.getWarehouses();
     private Set<String> categories = Repository.getCategories();
 
@@ -125,7 +126,8 @@ public class TheWarehouseManager {
 
     }
 
-/*    private void listItems(String[] warehouse) {
+    /* // NOT USED ANYMORE
+    private void listItems(String[] warehouse) {
         for (String item : warehouse) {
             System.out.println("- " + item);
         }
@@ -134,7 +136,7 @@ public class TheWarehouseManager {
     private void searchItemAndPlaceOrder() {
         String itemName = askItemToOrder();
 
-        List allAmounts = this.getMatchingItemLists(itemName);
+        Map<Integer, List<Item>> allAmounts = this.getMatchingItemLists(itemName);
         int totalAmount = this.getAvailableAmount(allAmounts);
 
         System.out.println("Amount available: " + totalAmount);
@@ -170,32 +172,37 @@ public class TheWarehouseManager {
      * @param matchingItems List of matchingItems per Warehouse
      * @return integer total amount
      */
-    private int getAvailableAmount(List<List> matchingItems) {
+    private int getAvailableAmount(Map<Integer, List<Item>> matchingItems) {
         int totalAmount = 0;
 
-         for (List warehouseItems : matchingItems) {
+         for (List<Item> warehouseItems : matchingItems.values()) {
              totalAmount += warehouseItems.size();
          }
 
         return totalAmount;
     }
 
-    private List<List> getMatchingItemLists(String itemName) {
-        List<List> allAmounts = new ArrayList(this.warehouses.size());
+    /**
+     * Create a map of all the occurrences of an item separated by warehouse
+     * @param itemName, String, the name of the item
+     * @return allAmounts, the matching items per warehouse
+     */
+    private Map<Integer, List<Item>> getMatchingItemLists(String itemName) {
+        Map<Integer, List<Item>> allAmounts = new HashMap<>(this.warehouses.size());
 
         for (int warehouse : this.warehouses) {
             List<Item> matchingItems = find(itemName, warehouse);
-            allAmounts.add(matchingItems);
+            allAmounts.put(warehouse, matchingItems);
         }
         return allAmounts;
     }
 
     /**
-     * Find the count of an item in a given warehouse
+     * Find the item in a given warehouse
      *
      * @param item the item
      * @param warehouse the warehouse
-     * @return count
+     * @return matchingItems, a List of the corresponding items found in the warehouse
      */
     private List<Item> find(String item, int warehouse) {
         List<Item> warehouseItems = new ArrayList<>(Repository.getItemsByWarehouse(warehouse));
@@ -209,14 +216,22 @@ public class TheWarehouseManager {
         return matchingItems;
     }
 
+    /** Print the location of an item without listing the available items
+     *
+     * @param location the location of the items
+     */
     private void printLocation(String location) {
         System.out.println("Location: " + location);
     }
 
-    private void printLocation(List<List> matchingItems) {
+    /** Print the location of an item and lists the corresponding items and their warehouse
+     *
+     * @param matchingItems a map of the matching items in the different locations
+     */
+    private void printLocation(Map<Integer, List<Item>> matchingItems) {
         Date today = new Date();
         System.out.println("Location: ");
-        for (List<Item> warehouseItems : matchingItems) {
+        for (List<Item> warehouseItems : matchingItems.values()) {
             for (Item item : warehouseItems) {
                 long days = TimeUnit.DAYS.convert(today.getTime() - item.getDateOfStock().getTime(), TimeUnit.MILLISECONDS);
                 System.out.println("- Warehouse " + item.getWarehouse() + " (in stock for " + days + " days)");
@@ -224,14 +239,19 @@ public class TheWarehouseManager {
         }
     }
 
-    private void printMaximumAvailability(List<List<Item>> matchingItems) {
-        int max_size = matchingItems.get(0).size();
-        int warehouse = matchingItems.get(0).get(0).getWarehouse();
+    /**
+     * Print the location with the maximum availability of an item
+     *
+     * @param matchingItems a map of the matching items in the different locations
+     */
+    private void printMaximumAvailability(Map<Integer, List<Item>> matchingItems) {
+        int max_size = 0;
+        int warehouse = 0;
 
-        for (List<Item> warehouseItems : matchingItems) {
-            if (warehouseItems.size() > max_size) {
-                max_size = warehouseItems.size();
-                warehouse = warehouseItems.get(0).getWarehouse();
+        for (Map.Entry<Integer, List<Item>> warehouseItems : matchingItems.entrySet()) {
+            if (warehouseItems.getValue().size() > max_size) {
+                max_size = warehouseItems.getValue().size();
+                warehouse = warehouseItems.getKey();
             }
         }
 
@@ -250,8 +270,8 @@ public class TheWarehouseManager {
     /**
      * Get amount of order
      *
-     * @param availableAmount
-     * @return
+     * @param availableAmount the total available amount of the item in question
+     * @return desiredAmount the amount to be ordered
      */
     private int getOrderAmount(int availableAmount) {
         int desiredAmount = reader.nextInt();
@@ -282,6 +302,10 @@ public class TheWarehouseManager {
         }
     }
 
+    /** Create a menu of categories with corresponding numbers
+     *
+     * @return categoryList, a map of categories and their numbers
+     */
     private Map<Integer, String> getCategoryMenu() {
         Map<Integer, String> categoryList = new HashMap<>();
         int count = 1;
@@ -294,16 +318,29 @@ public class TheWarehouseManager {
         return categoryList;
     }
 
+    /**
+     * Print the menu of categories and the number of items in each category
+     * @param categoryList a map of the categories and their numbers
+     */
     private void showCategoryMenu(Map<Integer, String> categoryList) {
         for (Map.Entry<Integer, String> entry : categoryList.entrySet()) {
             System.out.println(entry.getKey() + ". " + entry.getValue() + " (" + getAmountPerCategory(entry.getValue()) + ")");
         }
     }
 
+    /**
+     * Return the amount of items in a category
+     * @param category, String, name of the category
+     * @return int, amount of items
+     */
     private int getAmountPerCategory(String category) {
         return Repository.getItemsByCategory(category).size();
     }
 
+    /**
+     * Ask for the user's choice of category
+     * @return int, the chosen category
+     */
     private int getCategoryChoice() {
         System.out.println("Type the number of the category to browse");
         int choice;
@@ -316,6 +353,10 @@ public class TheWarehouseManager {
         return choice;
     }
 
+    /**
+     * Print the available items in a chosen category and their location
+     * @param category, String, the name of the category
+     */
     private void printCategoryItems(String category) {
         System.out.println("List of " + category.toLowerCase() + "s available:");
         for (Item item : Repository.getItemsByCategory(category)) {
