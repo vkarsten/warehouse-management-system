@@ -62,8 +62,7 @@ public class Repository {
      * @return the list of items
      */
     public static List<Item> getAllItems() {
-        // TODO
-        return null;
+        return ITEM_LIST;
     }
 
     // By Warehouse
@@ -73,7 +72,7 @@ public class Repository {
      * @return the warehouses
      */
     public static Set<Integer> getWarehouses() {
-        Set<Integer> warehouses = new HashSet<Integer>();
+        Set<Integer> warehouses = new HashSet<>();
 
         for (Item item : ITEM_LIST) {
             warehouses.add(item.getWarehouse());
@@ -105,8 +104,14 @@ public class Repository {
      * @return the items
      */
     public static List<Item> getItemsByWarehouse(int warehouse, List<Item> masterList) {
-        // TODO
-        return null;
+        List<Item> warehouseItems = new ArrayList<Item>();
+
+        for (Item item : masterList) {
+            if (item.getWarehouse() == warehouse) {
+                warehouseItems.add(item);
+            }
+        }
+        return warehouseItems;
     }
 
     // By Category
@@ -116,8 +121,13 @@ public class Repository {
      * @return the categories
      */
     public static Set<String> getCategories() {
-        // TODO
-        return null;
+        Set<String> categories = new HashSet<>();
+
+        for (Item item : ITEM_LIST) {
+            categories.add(item.getCategory());
+        }
+
+        return categories;
     }
 
     /**
@@ -127,8 +137,14 @@ public class Repository {
      * @return the items
      */
     public static List<Item> getItemsByCategory(String category) {
-        // TODO
-        return null;
+        List<Item> categoryItems = new ArrayList<Item>();
+
+        for (Item item : ITEM_LIST) {
+            if (item.getCategory().equals(category)) {
+                categoryItems.add(item);
+            }
+        }
+        return categoryItems;
     }
 
     /**
@@ -138,7 +154,13 @@ public class Repository {
      * @return the items
      */
     public static List<Item> getItemsByCategory(String category, List<Item> masterList) {
-        // TODO
-        return null;
+        List<Item> categoryItems = new ArrayList<Item>();
+
+        for (Item item : masterList) {
+            if (item.getCategory().equals(category)) {
+                categoryItems.add(item);
+            }
+        }
+        return categoryItems;
     }
 }
