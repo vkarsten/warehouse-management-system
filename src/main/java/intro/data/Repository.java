@@ -1,4 +1,4 @@
-package main.java.intro;
+package main.java.intro.data;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;

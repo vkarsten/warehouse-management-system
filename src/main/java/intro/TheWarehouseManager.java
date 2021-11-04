@@ -1,10 +1,13 @@
 package main.java.intro;
 
 
+import main.java.intro.data.Item;
+import main.java.intro.data.Repository;
+
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-import static main.java.intro.Repository.getItemsByWarehouse;
+import static main.java.intro.data.Repository.getItemsByWarehouse;
 
 /**
  * Provides necessary methods to deal through the Warehouse management actions
@@ -294,7 +297,7 @@ public class TheWarehouseManager {
         this.showCategoryMenu(categoryList);
 
         int categoryNumber = this.getCategoryChoice();
-        if (categoryNumber > 0) {
+        if (categoryNumber > 0 && categoryNumber <= categoryList.size()) {
             String category = categoryList.get(categoryNumber);
             printCategoryItems(category);
         } else {
@@ -342,7 +345,7 @@ public class TheWarehouseManager {
      * @return int, the chosen category
      */
     private int getCategoryChoice() {
-        System.out.println("Type the number of the category to browse");
+        System.out.println("Type the number of the category to browse:");
         int choice;
         try {
             choice = reader.nextInt();
