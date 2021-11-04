@@ -1,10 +1,9 @@
 package main.java.intro;
 
-import static main.java.intro.Repository.WAREHOUSE1;
-import static main.java.intro.Repository.WAREHOUSE2;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
+
+import static main.java.intro.Repository.getItemsByWarehouse;
 
 /**
  * Provides necessary methods to deal through the Warehouse management actions
@@ -23,6 +22,8 @@ public class TheWarehouseManager {
     };
     // To refer the user provided name.
     private String userName;
+
+    private Set<Integer> warehouses = Repository.getWarehouses();
 
     // =====================================================================================
     // Public Member Methods
@@ -99,20 +100,21 @@ public class TheWarehouseManager {
     }
 
     private void listItemsByWarehouse() {
-        System.out.println("Items in Warehouse 1: ");
-        listItems(WAREHOUSE1);
-
-        System.out.println("\n");
-
-        System.out.println("Items in Warehouse 2: ");
-        listItems(WAREHOUSE2);
+        for (int warehouse : this.warehouses) {
+            System.out.println("Items in Warehouse " + warehouse);
+            List<Item> warehouseItems = new ArrayList<>(Repository.getItemsByWarehouse(warehouse));
+            for (Item item : warehouseItems) {
+                System.out.println("- " + item.getState()+ " " + item.getCategory());
+            }
+            System.out.println("\n");
+        }
     }
 
-    private void listItems(String[] warehouse) {
+/*    private void listItems(String[] warehouse) {
         for (String item : warehouse) {
             System.out.println("- " + item);
         }
-    }
+    }*/
 
     private void searchItemAndPlaceOrder() {
         String itemName = askItemToOrder();
@@ -167,11 +169,16 @@ public class TheWarehouseManager {
      * @return integer array, total count, count in Warehouse 1, count in Warehouse 2
      */
     private int[] getAvailableAmounts(String itemName) {
-        int amountw1 = find(itemName, WAREHOUSE1);
-        int amountw2 = find(itemName, WAREHOUSE2);
-        int total = amountw1 + amountw2;
+        int[] allAmounts = new int[1+this.warehouses.size()];
+        allAmounts[0] = 0;
 
-        return new int[] {total, amountw1, amountw2};
+        for (int warehouse : this.warehouses) {
+            int amount = find(itemName, warehouse);
+            allAmounts[0] += amount;
+            allAmounts[warehouse] = amount;
+        }
+
+        return allAmounts;
     }
 
     /**
@@ -181,11 +188,14 @@ public class TheWarehouseManager {
      * @param warehouse the warehouse
      * @return count
      */
-    private int find(String item, String[] warehouse) {
+    private int find(String item, int warehouse) {
         int amount = 0;
 
-        for (String product: warehouse) {
-            if (product.toLowerCase().equals(item.toLowerCase())) amount++;
+        List<Item> warehouseItems = new ArrayList<>(Repository.getItemsByWarehouse(warehouse));
+
+        for (Item warehouseItem : warehouseItems) {
+            String productName = warehouseItem.getState().toLowerCase() + " " + warehouseItem.getCategory().toLowerCase();
+            if (item.toLowerCase().equals(productName)) amount++;
         }
 
         return amount;
